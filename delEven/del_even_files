@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+num='^[0-9]+$'
+for f in *;
+	
+do
+	x=${f%%.*}
+	if [[ "$x" =~ $num ]] && [ $(($x%2)) ==  0 ];
+	then
+		echo "$f is deleted"
+		rm $f		
+	fi
+done
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
