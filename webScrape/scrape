@@ -4,8 +4,18 @@ rm -f data.csv temp_cpy
 
 curl "https://www.blockchain.com/explorer" > temp_cpy
 
-height=$(cat temp_cpy | grep -m1 -P -o "\"height\"\:[0-9]+\,\"hash\"\:\"[\w]+\"" | head -1 )
+echo "Height HashID" >> data.csv
 
-echo "$height" >> data.csv 
+echo temp_cpy | grep -m1 -P -o "\"height\"\:[0-9]+\,\"hash\"\:\"[\w]+\"" | head -1 >> temp_cpy
+
+#search=$(cat temp_cpy | grep -m1 -P -o "\"height\"\:[0-9]+\,\"hash\"\:\"[\w]+\"" | head -1 ) 
+
+height=$( cat temp_cpy | grep -m1 -P -o "(?<=\"height\"\:)[0-9]+"| head -1)
+
+hashID=$( cat temp_cpy | grep -m1 -P -o "(?<=\"hash\"\:\")[\w]+"| head -1)
+
+echo "$height $hashID" >> data.csv 
+
+
 
 cat data.csv
