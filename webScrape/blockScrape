@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+rm -f temp_cpy data.csv
+
+echo "Height;" > data.csv
+
+curl "https://www.blockchain.com/explorer" > temp_cpy
+
+height=$(cat temp_cpy| grep -P "")
+
+echo "$height" >> data.csv
+
+cat data.csv
